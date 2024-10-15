@@ -1,7 +1,7 @@
 // npm install ai @ai-sdk/openai @e2b/code-interpreter
 import { openai } from '@ai-sdk/openai'
 import { generateText } from 'ai'
-import { CodeInterpreter } from '@e2b/code-interpreter'
+import { Sandbox } from '@e2b/code-interpreter'
 
 // Create OpenAI client
 const model = openai('gpt-4o')
@@ -16,8 +16,7 @@ const { text: code } = await generateText({
 })
 
 // Run the code in E2B Sandbox
-const sandbox = await CodeInterpreter.create()
-const { text, results, logs, error } = await sandbox.notebook.execCell(code)
-await sandbox.close()
+const sandbox = await Sandbox.create()
+const { text, results, logs, error } = await sandbox.runCode(code)
 
 console.log(text)

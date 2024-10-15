@@ -2,7 +2,7 @@
 import { openai } from '@ai-sdk/openai'
 import { generateText } from 'ai'
 import z from 'zod'
-import { CodeInterpreter } from '@e2b/code-interpreter'
+import { Sandbox } from '@e2b/code-interpreter'
 
 // Create OpenAI client
 const model = openai('gpt-4o')
@@ -22,9 +22,8 @@ const { text } = await generateText({
       }),
       execute: async ({ code }) => {
         // Create a sandbox, execute LLM-generated code, and return the result
-        const sandbox = await CodeInterpreter.create()
-        const { results, logs, error } = await sandbox.notebook.execCell(code)
-        await sandbox.close()
+        const sandbox = await Sandbox.create()
+        const { text, results, logs, error } = await sandbox.runCode(code)
         return results
       },
     },
