@@ -1,7 +1,7 @@
 # pip install mistralai e2b-code-interpreter
 import os
 from mistralai import Mistral
-from e2b_code_interpreter import CodeInterpreter
+from e2b_code_interpreter import Sandbox
 
 api_key = os.environ["MISTRAL_API_KEY"]
 
@@ -22,9 +22,9 @@ response = client.chat.complete(
 # Extract the code from the response
 code = response.choices[0].message.content
 
-# Execute the code with E2B Code Interpreter
-with CodeInterpreter() as sandbox:
-    execution = sandbox.notebook.exec_cell(code)
+# Execute code in E2B Sandbox
+with Sandbox() as sandbox:
+    execution = sandbox.run_code(code)
     result = execution.text
 
 print(result)

@@ -1,15 +1,15 @@
 # pip install crewai crewai[tools] e2b-code-interpreter
 from crewai_tools import tool
 from crewai import Agent, Task, Crew, LLM
-from e2b_code_interpreter import CodeInterpreter
+from e2b_code_interpreter import Sandbox
 
 @tool("Python interpreter tool")
 def execute_python(code: str):
     """
     Execute Python code and return the results.
     """
-    with CodeInterpreter() as sandbox:
-        execution = sandbox.notebook.exec_cell(code)
+    with Sandbox() as sandbox:
+        execution = sandbox.run_code(code)
         return execution.text
 
 # Define the agent

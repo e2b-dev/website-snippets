@@ -1,6 +1,6 @@
 # pip install ollama
 import ollama
-from e2b_code_interpreter import CodeInterpreter
+from e2b_code_interpreter import Sandbox
 
 # Send the prompt to the model
 response = ollama.chat(model="llama3.2", messages=[
@@ -17,9 +17,9 @@ response = ollama.chat(model="llama3.2", messages=[
 # Extract the code from the response
 code = response['message']['content']
 
-# Execute the code with E2B Code Interpreter
-with CodeInterpreter() as sandbox:
-    execution = sandbox.notebook.exec_cell(code)
+# Execute code in E2B Sandbox
+with Sandbox() as sandbox:
+    execution = sandbox.run_code(code)
     result = execution.logs.stdout
 
 print(result)

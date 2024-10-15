@@ -1,12 +1,12 @@
 from llama_index.core.tools import FunctionTool
 from llama_index.llms.openai import OpenAI
 from llama_index.core.agent import ReActAgent
-from e2b_code_interpreter import CodeInterpreter
+from e2b_code_interpreter import Sandbox
 
 # Define the tool
 def execute_python(code: str):
-    with CodeInterpreter() as sandbox:
-        execution = sandbox.notebook.exec_cell(code)
+    with Sandbox() as sandbox:
+        execution = sandbox.run_code(code)
         return execution.text
 
 e2b_interpreter_tool = FunctionTool.from_defaults(

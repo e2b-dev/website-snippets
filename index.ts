@@ -3,7 +3,7 @@ import { CodeInterpreter } from '@e2b/code-interpreter'
 
 // Create a E2B Code Interpreter with JavaScript kernel
 const sandbox = await CodeInterpreter.create()
-await sandbox.notebook.createKernel({ kernelName: 'javascript' })
+await sandbox.notebook.createKernel('javascript')
 
 // Execute JavaScript cells
 await sandbox.notebook.execCell('x = 1')

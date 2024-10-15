@@ -3,7 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import tool
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_openai import ChatOpenAI
-from e2b_code_interpreter import CodeInterpreter
+from e2b_code_interpreter import Sandbox
 
 system_prompt = "You are a helpful assistant that can execute python code in a Jupyter notebook. Only respond with the code to be executed and nothing else. Strip backticks in code blocks."
 prompt = "Calculate how many r's are in the word 'strawberry'"
@@ -14,8 +14,8 @@ def e2b_interpreter_tool(code: str):
     """
     Execute python code in a Jupyter notebook.
     """
-    with CodeInterpreter() as sandbox:
-        execution = sandbox.notebook.exec_cell(code)
+    with Sandbox() as sandbox:
+        execution = sandbox.run_code(code)
         return execution.text
 
 # Define LangChain components
