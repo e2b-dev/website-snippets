@@ -38,6 +38,7 @@ response = client.chat.completions.create(
     tools=tools,
 )
 
+# Append the response message to the messages list
 response_message = response.choices[0].message
 messages.append(response_message)
 
@@ -59,6 +60,7 @@ if response_message.tool_calls:
                 "content": result
             })
 
+# Generate the final response
 final_response = client.chat.completions.create(
     model="gpt-4o",
     messages=messages
