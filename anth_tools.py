@@ -4,7 +4,9 @@ from e2b_code_interpreter import Sandbox
 
 # Create Anthropic client
 client = Anthropic()
+model = "claude-3-5-sonnet-20240620"
 
+# Define the messages
 messages = [
     {
         "role": "user",
@@ -30,7 +32,7 @@ tools = [{
 
 # Generate text with Anthropic
 message = client.messages.create(
-    model="claude-3-5-sonnet-20240620",
+    model=model,
     max_tokens=1024,
     messages=messages,
     tools=tools
@@ -68,7 +70,7 @@ if message.stop_reason == "tool_use":
 
 # Generate the final response
 final_response = client.messages.create(
-    model="claude-3-5-sonnet-20240620",
+    model=model,
     max_tokens=1024,
     messages=messages,
     tools=tools

@@ -5,6 +5,9 @@ from e2b_code_interpreter import Sandbox
 
 # Create OpenAI client
 client = OpenAI()
+model = "gpt-4o"
+
+# Define the messages
 messages = [
     {
         "role": "user",
@@ -33,7 +36,7 @@ tools = [{
 
 # Generate text with OpenAI
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model=model,
     messages=messages,
     tools=tools,
 )
@@ -62,7 +65,7 @@ if response_message.tool_calls:
 
 # Generate the final response
 final_response = client.chat.completions.create(
-    model="gpt-4o",
+    model=model,
     messages=messages
 )
 

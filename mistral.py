@@ -3,10 +3,8 @@ import os
 from mistralai import Mistral
 from e2b_code_interpreter import Sandbox
 
-api_key = os.environ["MISTRAL_API_KEY"]
-
 # Create Mistral client
-client = Mistral(api_key=api_key)
+client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
 system_prompt = "You are a helpful assistant that can execute python code in a Jupyter notebook. Only respond with the code to be executed and nothing else. Strip backticks in code blocks."
 prompt = "Calculate how many r's are in the word 'strawberry'"
 

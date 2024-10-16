@@ -19,9 +19,14 @@ code_execution_tool = Tool(
 # Initialize the language model and bind the tool
 llm = ChatOpenAI(model="gpt-4o").bind_tools([code_execution_tool])
 
+# Define the messages
+messages = [
+    HumanMessage(content="Calculate how many 'r's are in the word 'strawberry'.")
+]
+
 # Run the model with a prompt
-prompt = "Calculate how many 'r's are in the word 'strawberry'."
-result = llm.invoke([HumanMessage(content=prompt)])
+result = llm.invoke(messages)
+messages.append(AIMessage(content=result.content))
 
 # Check if the model called the tool
 if result.additional_kwargs.get('tool_calls'):
@@ -31,11 +36,9 @@ if result.additional_kwargs.get('tool_calls'):
         execution_result = execute_python(code)
 
         # Send the result back to the model
-        final_result = llm.invoke([
-            HumanMessage(content=prompt),
-            AIMessage(content=result.content),
+        messages.append(
             FunctionMessage(name="execute_python", content=execution_result)
-        ])
-        print(final_result.content)
-else:
-    print(result.content)
+        )
+
+final_result = llm.invoke(messages)
+print(final_result.content)

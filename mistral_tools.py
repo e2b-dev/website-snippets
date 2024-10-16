@@ -4,10 +4,9 @@ import json
 from mistralai import Mistral
 from e2b_code_interpreter import Sandbox
 
-api_key = os.environ["MISTRAL_API_KEY"]
-
 # Create Mistral client
-client = Mistral(api_key=api_key)
+client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+model = "mistral-large-latest"
 messages = [
     {
         "role": "user",
@@ -36,7 +35,7 @@ tools = [{
 
 # Send the prompt to the model
 response = client.chat.complete(
-    model="mistral-large-latest",
+    model=model,
     messages=messages,
     tools=tools
 )
@@ -65,7 +64,7 @@ if response_message.tool_calls:
 
 # Generate the final response
 final_response = client.chat.complete(
-    model="mistral-large-latest",
+    model=model,
     messages=messages,
 )
 
