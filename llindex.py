@@ -1,3 +1,4 @@
+# pip install llama-index e2b-code-interpreter
 from llama_index.core.tools import FunctionTool
 from llama_index.llms.openai import OpenAI
 from llama_index.core.agent import ReActAgent
