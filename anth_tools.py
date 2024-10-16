@@ -15,7 +15,7 @@ messages = [
 # Define the tools
 tools = [{
     "name": "execute_python",
-    "description": "Execute python code in a Jupyter notebook cell and return result",
+    "description": "Execute python code in a Jupyter notebook cell and return (not print) the result",
     "input_schema": {
         "type": "object",
         "properties": {
