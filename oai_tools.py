@@ -55,9 +55,9 @@ if response_message.tool_calls:
             # Send the result back to the model
             messages.append({
                 "role": "tool",
-                "tool_call_id": tool_call.id,
                 "name": "execute_python",
-                "content": result
+                "content": result,
+                "tool_call_id": tool_call.id,
             })
 
 # Generate the final response
