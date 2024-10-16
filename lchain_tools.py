@@ -10,14 +10,14 @@ def execute_python(code: str):
         return execution.text
 
 # Define a tool that uses the CodeInterpreter
-code_execution_tool = Tool(
+e2b_interpreter_tool = Tool(
     name="execute_python",
     func=execute_python,
     description="Execute python code in a Jupyter notebook cell and return result"
 )
 
 # Initialize the language model and bind the tool
-llm = ChatOpenAI(model="gpt-4o").bind_tools([code_execution_tool])
+llm = ChatOpenAI(model="gpt-4o").bind_tools([e2b_interpreter_tool])
 
 # Define the messages
 messages = [
