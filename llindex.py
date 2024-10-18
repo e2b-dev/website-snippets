@@ -10,7 +10,7 @@ def execute_python(code: str):
         execution = sandbox.run_code(code)
         return execution.text
 
-e2b_interpreter_tool = FunctionTool.from_defaults(
+e2b_sandbox_tool = FunctionTool.from_defaults(
     name="execute_python",
     description="Execute python code in a Jupyter notebook cell and return result",
     fn=execute_python
@@ -20,5 +20,5 @@ e2b_interpreter_tool = FunctionTool.from_defaults(
 llm = OpenAI(model="gpt-4o")
 
 # Initialize ReAct agent
-agent = ReActAgent.from_tools([e2b_interpreter_tool], llm=llm, verbose=True)
+agent = ReActAgent.from_tools([e2b_sandbox_tool], llm=llm, verbose=True)
 agent.chat("Calculate how many r's are in the word 'strawberry'")

@@ -15,7 +15,7 @@ const { text } = await generateText({
   prompt,
   tools: {
     // Define a tool that runs code in a sandbox
-    codeInterpreter: {
+    execute_python: {
       description: 'Execute python code in a Jupyter notebook cell and return result',
       parameters: z.object({
         code: z.string().describe('The python code to execute in a single cell'),

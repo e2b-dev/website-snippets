@@ -10,7 +10,7 @@ prompt = "Calculate how many r's are in the word 'strawberry'"
 
 # Define the tool
 @tool
-def e2b_interpreter_tool(code: str):
+def execute_python(code: str):
     """
     Execute python code in a Jupyter notebook.
     """
@@ -25,7 +25,7 @@ prompt_template = ChatPromptTemplate.from_messages([
     ("placeholder", "{agent_scratchpad}"),
 ])
 
-tools = [e2b_interpreter_tool]
+tools = [execute_python]
 llm = ChatOpenAI(model="gpt-4o", temperature=0)
 
 agent = create_tool_calling_agent(llm, tools, prompt_template)
